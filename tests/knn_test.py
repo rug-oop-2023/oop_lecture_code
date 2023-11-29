@@ -39,3 +39,9 @@ class KNearestNeighborsTest(unittest.TestCase):
         test_point = np.array([2,1])
         neighbor_index = knn_model._return_neighbors(test_point)[0]
         self.assertEqual(neighbor_index, 2)
+    
+    def test_return_two_neighbors(self):
+        knn_model = knn.KNearestNeighbors(2, self.dataset)
+        test_point = np.array([1,1])
+        neighbor_indices = knn_model._return_neighbors(test_point)
+        self.assertSetEqual(set(neighbor_indices), {0,1})

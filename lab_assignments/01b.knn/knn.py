@@ -11,6 +11,7 @@ class KNearestNeighbors:
         Return the index of the closest data point to the given data point.
         """
         distances = np.linalg.norm(self.data - data_point, axis=1)
-        return [np.argmin(distances)]
+        sorted_indices = np.argsort(distances)
+        return sorted_indices[:self.num_neighbors]
 
         
