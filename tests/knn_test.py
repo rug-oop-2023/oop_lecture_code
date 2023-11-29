@@ -7,6 +7,16 @@ sys.path.append('lab_assignments/01b.knn')
 import knn
 
 class KNearestNeighborsTest(unittest.TestCase):
+    def setUp(self):
+        self.dataset = np.array([
+                [0,0],
+                [1,2],
+                [2,0],
+                [4,1],
+                [5,0],
+                [6,2]
+            ])
+
     def test_init_k(self):
         num_neighbors = 3
         knn_model = knn.KNearestNeighbors(num_neighbors)
@@ -19,3 +29,9 @@ class KNearestNeighborsTest(unittest.TestCase):
         self.assertEqual(knn_model.data, None)
         knn_model = knn.KNearestNeighbors(num_neighbors, sample_data)
         np.testing.assert_array_equal(knn_model.data, sample_data)
+    
+    def test_return_neighbors(self):
+        knn_model = knn.KNearestNeighbors(1, self.dataset)
+        test_point = np.array([0,1])
+        neighbor_index = knn_model._return_neighbors(test_point)[0]
+        self.assertEqual(neighbor_index, 0)
