@@ -59,3 +59,9 @@ class KNearestNeighborsTest(unittest.TestCase):
         test_point = np.array([3,2])
         neighbor_indices = knn_model._return_neighbors(test_point)
         self.assertSetEqual(set(neighbor_indices), {1,2,3,4,5})
+    
+    def test_get_ties(self):
+        distances = np.array([0,0,1])
+        knn_model = knn.KNearestNeighbors(1)
+        ties_index = knn_model._get_ties(distances)
+        self.assertListEqual(ties_index, [0,1])

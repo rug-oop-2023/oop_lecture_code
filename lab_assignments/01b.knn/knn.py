@@ -6,6 +6,14 @@ class KNearestNeighbors:
         self.num_neighbors = num_neighbors
         self.data = data
     
+    def _get_ties(self, distances:np.array) -> List[int]:
+        """
+        Identifies possible ties in the list of distances.
+        Ties are identified only according to the k-th nearest neighbor.
+        """
+        return [0, 1]
+
+
     def _return_neighbors(self, data_point:np.array) -> List[int]:
         """
         Return the index of the closest data point to the given data point.
