@@ -11,7 +11,10 @@ class KNearestNeighbors:
         Identifies possible ties in the list of distances.
         Ties are identified only according to the k-th nearest neighbor.
         """
-        return [0, 1]
+        distances_sorted = np.sort(distances)
+        for i in range(1, len(distances_sorted)):
+            if distances_sorted[i] != distances_sorted[i-1]:
+                return list(range(i))
 
 
     def _return_neighbors(self, data_point:np.array) -> List[int]:
