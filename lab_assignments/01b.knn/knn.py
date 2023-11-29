@@ -11,7 +11,9 @@ class KNearestNeighbors:
         Identifies possible ties in the list of distances.
         Ties are identified only according to the k-th nearest neighbor.
         """
+        original_indices_sorted = np.argsort(distances)
         distances_sorted = np.sort(distances)
+
 
         for i in range(self.num_neighbors, len(distances_sorted)):
             if distances_sorted[i] != distances_sorted[i-1]:
@@ -19,8 +21,8 @@ class KNearestNeighbors:
 
                 for j in range(self.num_neighbors-2, -1, -1):
                     if distances_sorted[j] != distances_sorted[i-1]:
-                        return list(range(j+1, i))
-                return tied_indices
+                        return original_indices_sorted[list(range(j+1, i))]
+                return original_indices_sorted[tied_indices]
 
 
             

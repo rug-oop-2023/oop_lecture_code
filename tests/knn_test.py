@@ -64,16 +64,28 @@ class KNearestNeighborsTest(unittest.TestCase):
         distances = np.array([0,0,1])
         knn_model = knn.KNearestNeighbors(1)
         ties_index = knn_model._get_ties(distances)
-        self.assertListEqual(ties_index, [0,1])
+        np.testing.assert_array_equal(ties_index, [0,1])
 
     def test_get_ties_simple_three(self):
         distances = np.array([0,0,0,1])
         knn_model = knn.KNearestNeighbors(1)
         ties_index = knn_model._get_ties(distances)
-        self.assertListEqual(ties_index, [0,1,2])
+        np.testing.assert_array_equal(ties_index, [0,1,2])
 
     def test_get_ties_simple_not_first_position(self):
         distances = np.array([0,1,1,2])
         knn_model = knn.KNearestNeighbors(2)
         ties_index = knn_model._get_ties(distances)
-        self.assertListEqual(ties_index, [1,2])
+        np.testing.assert_array_equal(ties_index, [1,2])
+
+    def test_get_ties_simple_not_first_position_three(self):
+        distances = np.array([0,0,1,1,1,2])
+        knn_model = knn.KNearestNeighbors(4)
+        ties_index = knn_model._get_ties(distances)
+        np.testing.assert_array_equal(ties_index, [2,3,4])
+    
+    def test_get_ties_simple_unordered(self):
+        distances = np.array([1,0,0])
+        knn_model = knn.KNearestNeighbors(1)
+        ties_index = knn_model._get_ties(distances)
+        np.testing.assert_array_equal(ties_index, [1,2])
