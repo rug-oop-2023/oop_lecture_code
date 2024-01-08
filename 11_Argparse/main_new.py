@@ -15,7 +15,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--forest_criterion", type=str, default="gini", choices=["gini", "entropy"], help="Criterion to use for random forest.")
     parser.add_argument("--knn_neighbors", type=int, default=5, help="Number of neighbors to use for KNN.")
     parser.add_argument("--knn_metric", type=str, default="euclidean", choices=["euclidean", "manhattan"], help="Distance metric to use for KNN.")
-    parser.add_argument("--verbose", action="store_true", default="False", help="Show verbose output.")
+    parser.add_argument("--verbose", action="store_true", default=False, help="Show verbose output.")
 
     args = parser.parse_args()
     check_args(args)
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     data = load_iris()
 
-    verbosity_level = 2 if args.verbose else 0
+    verbosity_level = 2 * args.verbose
 
     X = data.data
     y = data.target
